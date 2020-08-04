@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-const db = require("../database/dbConfig.js");
-=======
 const db = require("../database/connection.js");
->>>>>>> upstream/main
 
 module.exports = {
   add,
@@ -12,25 +8,6 @@ module.exports = {
 };
 
 function find() {
-<<<<<<< HEAD
-  return db("users").select("id", "username");
-}
-
-function findBy(filter) {
-  return db("users").where(filter);
-}
-
-async function add(user) {
-  const [id] = await db("users").insert(user, "id");
-
-  return findById(id);
-}
-
-function findById(id) {
-  return db("users")
-    .where({ id })
-    .first();
-=======
   return db("users").select("id", "username").orderBy("id");
 }
 
@@ -50,5 +27,4 @@ async function add(user) {
 
 function findById(id) {
   return db("users").where({ id }).first();
->>>>>>> upstream/main
 }
