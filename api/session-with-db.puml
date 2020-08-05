@@ -1,0 +1,24 @@
+@startuml express-session-flow
+actor client
+participant express
+participant expressSession
+participant restricted
+participant getUsers
+participant sqlite3
+client -> client : check for domain cookie
+client -> express : send cookie
+express -> expressSession : search for cookie
+expressSession -> sqlite3 : retrieve session object (with .user)
+sqlite3 -> expressSession : return session object (or create new)
+expressSession -> express : add req.session (with .user if it exists)
+express -> restricted : middleware stack (send req, req.session, req.session.user)
+restricted -> restricted : search for req.session.user
+restricted -> express : not found, respond with error code
+restricted -> getUsers : found! next()
+getUsers -> sqlite3 : get response data from database
+sqlite3 -> getUsers : return data
+getUsers -> express : return data
+express -> expressSession : get the session object
+express -> express : add session object cookie
+express -> client : respond with cookie
+@enduml
