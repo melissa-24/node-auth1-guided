@@ -21,3 +21,8 @@ Please follow along as the instructor adds authentication to the API.
 - ./auth/auth-router.js
 - ./auth/restricted-middleware.js
 - ./users/users-router.js
+- ./session-workflow.puml
+- ./express-session-workflow.puml
+- ./session-with-db.puml
+
+### NOTE: The *.puml files can be viewed using the PlantUML extension to VSCode.
